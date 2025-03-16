@@ -6,33 +6,29 @@
     <title>Redirecting...</title>
     <script>
         function getAuthCode() {
-            // Get auth_code from either URL params or hash fragment
+            // Get auth_code from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             let authCode = urlParams.get("auth_code");
 
+            // If auth_code is not found, check in the hash fragment
             if (!authCode) {
-                // If auth_code is not found in query params, check in hash fragment
                 const hashParams = new URLSearchParams(window.location.hash.substring(1));
                 authCode = hashParams.get("auth_code");
             }
 
             if (authCode) {
-                // Use sessionStorage instead of localStorage (Optional)
+                // Store the auth_code in sessionStorage (or localStorage if needed)
                 sessionStorage.setItem("auth_code", authCode);
                 console.log("✅ Auth Code Received:", authCode);
 
-                // Redirect after a short delay
-                setTimeout(() => {
-                    window.location.href = "dashboard.html";  // Ensure this file exists
-                }, 1000);
+                // Redirect to the dashboard
+                window.location.href = "dashboard.html";  
             } else {
                 alert("❌ Authentication Failed! Please login again.");
                 console.error("Auth Code Not Found");
 
-                // Redirect to login page after a delay
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 1000);
+                // Redirect back to the login page
+                window.location.href = "index.html";
             }
         }
 
