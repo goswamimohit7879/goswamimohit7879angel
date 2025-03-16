@@ -11,12 +11,17 @@
 
     <script>
         function redirectToAngelOne() {
-            const clientId = "5lnTLnxT";
+            const clientId = "5lnTlnxT";
             const redirectUrl = "https://effervescent-bubblegum-d7c513.netlify.app/dashboard";
 
-            const authUrl = `https://smartapi.angelbroking.com/publisher-login?api_key=${clientId}&redirect_url=${encodeURIComponent(redirectUrl)}`;
+            // Ensure redirect URL is properly encoded
+            const encodedRedirectUrl = encodeURIComponent(redirectUrl);
 
-            window.location.href = authUrl;  // Redirect to Angel One login page
+            // Fix: Correct variable interpolation in template string
+            const authUrl = `https://smartapi.angelbroking.com/publisher-login?api_key=${clientId}&redirect_url=${encodedRedirectUrl}`;
+
+            // Redirect to Angel One login page
+            window.location.href = authUrl;
         }
     </script>
 </body>
