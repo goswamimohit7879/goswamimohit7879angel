@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script>
-        // Check if access token is stored
+        // ✅ Access Token को Local Storage से प्राप्त करें
         const accessToken = localStorage.getItem("access_token");
 
         if (!accessToken) {
-            alert("Unauthorized access! Please log in.");
-            window.location.href = "index.html"; // Redirect to login page
+            alert("❌ Unauthorized access! Please log in.");
+            window.location.href = "index.html"; // 🔄 Redirect to Login Page
         } else {
-            fetchUserProfile();
+            fetchUserProfile(); // 🛠️ Call API to fetch user profile
         }
 
+        // 🎯 Angel One API से प्रोफाइल डेटा लाने का फ़ंक्शन
         function fetchUserProfile() {
             fetch("https://apiconnect.angelbroking.com/rest/secure/angelbroking/user/v1/getProfile", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
-                    "X-API-KEY": "5lnTLnxT"
+                    "X-API-KEY": "YOUR_API_KEY"
                 }
             })
             .then(response => response.json())
@@ -29,12 +30,12 @@
                 if (data.status) {
                     document.getElementById("username").innerText = data.data.name;
                 } else {
-                    alert("Session expired! Please log in again.");
+                    alert("⚠️ Session expired! Please log in again.");
                     localStorage.removeItem("access_token");
-                    window.location.href = "index.html"; // Redirect to login page
+                    window.location.href = "index.html"; // 🔄 Redirect to Login Page
                 }
             })
-            .catch(error => console.error("Error fetching profile:", error));
+            .catch(error => console.error("❌ Error fetching profile:", error));
         }
     </script>
 </head>
