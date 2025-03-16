@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel One Login</title>
+</head>
+<body>
+    <h1>Welcome to Angel One Algo Trading</h1>
+    <button onclick="redirectToAngelOne()">Login with Angel One</button>
+
+    <script>
+        function redirectToAngelOne() {
+            const clientId = "yUdBvecQ";  //
+            const redirectUrl = "https://angelonemg.netlify.app/redirect.html";  // 
+
+            const authUrl = `https://smartapi.angelbroking.com/publisher-login?api_key=${clientId}&redirect_url=${encodeURIComponent(redirectUrl)}`;
+
+            window.location.href = authUrl;  // 
+        }
+    </script>
+</body>
+</html>
